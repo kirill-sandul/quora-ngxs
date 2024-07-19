@@ -1,0 +1,10 @@
+<button
+  *ngIf="btn_state$ | async"
+  class="home__questions__load_more_btn flex" mat-stroked-button
+  (click)="callback()"
+>
+  Загрузить еще
+  <mat-progress-spinner *ngIf="btn_loading" class="tag-block__tag__load_more_btn__loader" mode="indeterminate"
+    style="margin-left: 10px;" [diameter]="20">
+  </mat-progress-spinner>
+</button>

@@ -1,0 +1,24 @@
+<!-- <a routerLink={{url}}> -->
+  <div class="question-card" matRipple (click)="click()">
+    <div class="question-card__wrapper">
+      <span class="question-card__tags">
+        <span class="question-card__tags__tag" *ngFor="let tag of question.tags">{{ tag }}</span>
+      </span>
+      <h3 class="question-card__title" (click)="$event.stopPropagation()">
+        {{ question.title }}
+      </h3>
+    </div>
+    <div class="question-card__text-preview" *ngIf="question.answers.length">
+      {{ question.answers[0].text | answerPreviewText }}
+    </div>
+    <div class="question-card__bottom">
+      <span
+        class="question-card__answers"
+        (click)="$event.stopPropagation()">
+        {{ question.answers.length | answersLength }}
+      </span>
+      <button mat-button color="primary" class="question-card__answer-btn">Ответить <mat-icon>draw</mat-icon>
+      </button>
+    </div>
+  </div>
+<!-- </a> -->

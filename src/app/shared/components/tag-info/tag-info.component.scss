@@ -1,0 +1,40 @@
+@import '../../../scss/vars';
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.tag-info {
+  border: 1px solid $primary_gray_light;
+  margin-right: 50px;
+  animation: .2s fade;
+  
+  &__wrapper {
+    padding: 10px 20px;
+  }
+  
+  &__follow, &__unfollow {
+    animation: fade 0.2s;
+
+    &--disabled {
+      pointer-events: none;
+    }
+  }
+
+  &__followers {
+    font-weight: 600;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__description {
+    color: $primary_gray;
+    font-weight: 500;
+  }
+}

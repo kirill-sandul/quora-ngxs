@@ -1,0 +1,21 @@
+.create-q {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  
+    &__field {
+      min-width: 440px;
+    }
+  }
+
+  &__button {
+    width: fit-content;
+    align-self: flex-end;
+  }
+}

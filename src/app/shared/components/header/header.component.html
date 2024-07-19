@@ -1,0 +1,37 @@
+<header class="header" *ngIf="hide">
+  <div class="header__wrapper">
+    <a routerLink="" class="header__logo">
+      Quora
+    </a>
+    <a routerLink="create-question">
+      <button mat-raised-button color="primary" class="header__account__create-btn">
+        Задать вопрос
+        <mat-icon>create</mat-icon>
+      </button>
+    </a>
+  </div>
+
+  <span class="header__line"></span>
+
+  <div class="header__wrapper">
+    <div class="header__account">
+      <span class="header__account__name">Аккаунт</span>
+      <button class="header__account__settings-btn" mat-icon-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button
+        mat-stroked-button color="warn"
+        class="header__account__exit-btn"
+        (click)="logout()"
+      >
+        Выйти
+      </button>
+    </div>
+  </div>
+
+  <mat-progress-bar
+    mode="indeterminate"
+    class="header__progress-bar"
+    *ngIf="loading$ | async">
+  </mat-progress-bar>
+</header>

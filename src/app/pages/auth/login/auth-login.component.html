@@ -1,0 +1,20 @@
+<app-auth-page-wrapper>
+  <div class="auth__widget__links">
+    <a routerLink="/auth/register" class="auth__widget__links__link">Если еще нет аккаунта</a>
+    <a href="" class="auth__widget__links__link">Политика конфиденциальности</a>
+  </div>
+  <app-reactive-form
+    [form_schema]="form_schema"
+    [form_names]="form_names"
+    (on_submit)="submit($event)"
+    (invalid)="toggle_button($event)"
+  >
+    <div *ngIf="server_error"
+      class="auth__widget__form__server-error">
+      {{ server_error }}
+    </div>
+    <button type="submit" mat-flat-button color="primary" [disabled]="invalid || create_loading">
+      Войти в аккаунт
+    </button>
+  </app-reactive-form>
+</app-auth-page-wrapper>

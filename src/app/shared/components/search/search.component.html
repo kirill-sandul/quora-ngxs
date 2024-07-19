@@ -1,0 +1,33 @@
+<div class="home__questions__search">
+  <mat-form-field appearance="fill" class="home__questions__search__field">
+    <mat-label>Поиск</mat-label>
+    <input
+      #search_input
+      matInput
+      class="home__questions__search__input"
+      [(ngModel)]="search_service.value"
+      (ngModelChange)="search_service.filter()"
+    />
+    <mat-icon
+      matSuffix
+      *ngIf="!search_service.value"
+    >
+      search
+    </mat-icon>
+    <button 
+      matSuffix
+      mat-icon-button
+      (click)="this.search_service.clear()"
+      *ngIf="search_service.value"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="home__questions__search__options">
+    <mat-label>Поиск по:</mat-label>
+    <mat-select [(value)]="search_service.search_type">
+      <mat-option value="questions">Вопросам</mat-option>
+      <mat-option value="tags">Тэгам</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

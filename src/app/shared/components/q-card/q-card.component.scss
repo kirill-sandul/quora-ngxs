@@ -1,0 +1,65 @@
+@import '../../../scss/vars';
+
+.question-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: left;
+  font-family: 'Manrope', sans-serif;
+  background-color: #fff;
+  border: 1px solid $primary_gray_light;
+  padding: 25px 20px;
+  max-width: 700px;
+  min-width: 500px;
+  margin-bottom: 20px;
+
+  &__wrapper {
+    display: flex;
+    // align-items: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 0;
+  }
+
+  &__text-preview {
+    color: $primary_gray;
+    margin-bottom: 10px;
+  }
+
+  &__tags {
+    &__tag {
+      color: $primary_gray;
+      margin-right: 4px;
+
+      &:after {
+        content: ',';
+      }
+
+      &:last-child {
+        margin-right: 0;
+
+        &:after {
+          content: '';
+        }
+      }
+    }
+  }
+
+  &__answers {
+    margin-bottom: 7px;
+  }
+
+  &__answer-btn {
+    max-width: 120px;
+    align-self: flex-end;
+  }
+
+  &--last-child {
+    margin-right: 0;
+    border-bottom: 1px solid $primary_gray_light;
+  }
+}

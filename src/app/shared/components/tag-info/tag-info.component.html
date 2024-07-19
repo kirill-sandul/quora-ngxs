@@ -1,0 +1,30 @@
+<div class="tag-info">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <div class="tag-info__wrapper">
+    <h1 class="tag-info__title">{{ tag.name }}</h1>
+    <p class="tag-info__description" *ngIf="tag.description">{{ tag.description }}</p>
+    <mat-chip selected class="tag-info__followers">{{ tag.followers }} подписчиков</mat-chip>
+    <button
+      *ngIf="!(followed$ | async)"
+      class="tag-info__follow"
+      [class.tag-info__follow--disabled]="loading"
+      mat-stroked-button
+      color="primary"
+      (click)="follow_tag()"
+    >
+      Подписаться
+      <mat-icon class="material-icons">bookmark_border</mat-icon>
+    </button>
+    <button
+      *ngIf="followed$ | async"
+      class="tag-info__unfollow"
+      [class.tag-info__unfollow--disabled]="loading"
+      mat-stroked-button
+      color="primary"
+      (click)="unfollow_tag()"
+    >
+      Отписаться
+      <mat-icon class="material-icons">bookmark_remove_border</mat-icon>
+    </button>
+  </div>
+</div>

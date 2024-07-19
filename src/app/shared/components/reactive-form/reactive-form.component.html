@@ -1,0 +1,38 @@
+<form [class]="class" [formGroup]="form" (ngSubmit)="submit(form)">
+  <ng-container *ngFor="let field of form_schema">
+    <mat-form-field
+      [class]="field.class ? (class + '__' + field.class) : ''"
+      [appearance]="field.appearance ? $any(field.appearance) : 'outline'"
+      *ngIf="field.type !== 'tags'"
+    >
+      <mat-label>{{ field.label }}</mat-label>
+      <input
+        matInput
+        *ngIf="field.type !== 'textarea'"
+        [type]="field.type ? field.type : 'text'"
+        [formControlName]="field.name"
+        [value]="form.get(field.name)"
+        [placeholder]="field.placeholder ? field.placeholder : ''"
+      />
+      <textarea
+        matInput
+        *ngIf="field.type === 'textarea'"
+        [formControlName]="field.name"
+        [value]="form.get(field.name)"
+        [placeholder]="field.placeholder ? field.placeholder : ''" 
+      ></textarea>
+      <mat-error *ngIf="form.get(field.name)!.invalid">{{control_error(field.name)}}</mat-error>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *ngFor="let field of form_schema">
+    <app-reactive-form-tags-field
+      *ngIf="field.type === 'tags'"
+      [form]="form"
+      [class]="field.class ? (class + '__' + field.class) : ''"
+      [field]="field"
+      [control_error]="control_error.bind(this)"
+    >
+    </app-reactive-form-tags-field>
+  </ng-container>
+  <ng-content></ng-content>
+</form>

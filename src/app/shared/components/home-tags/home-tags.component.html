@@ -1,0 +1,26 @@
+<drag-scroll
+  class="home__questions__header__tags"
+  [drag-scroll-y-disabled]="true"
+  [scrollbar-hidden]="true"
+  [snap-disabled]="true"
+>
+  <mat-chip-list>
+    <mat-chip
+      drag-scroll-item
+      class="home__questions__header__tags__tag"
+      (click)="select_tag('')"
+      [selected]="!(selected_tag$ | async)?.name"
+    >
+      Все
+    </mat-chip>
+    <mat-chip
+      drag-scroll-item
+      class="home__questions__header__tags__tag"
+      *ngFor="let tag of followed_tags$ | async"
+      (click)="select_tag(tag.name)"
+      [selected]="tag.name === (selected_tag$ | async)?.name">
+      {{ tag.name }}
+      <span class="home__questions__header__tags__tag__followers">{{ tag.followers }}</span>
+    </mat-chip>
+  </mat-chip-list>
+</drag-scroll>

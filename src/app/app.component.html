@@ -1,0 +1,4 @@
+<app-header [hide]="!hide_header(outlet)"></app-header>
+<div [@router_animation]="prepare_route(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

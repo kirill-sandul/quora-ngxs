@@ -1,0 +1,115 @@
+<div class="container">
+  <!-- [@main_anim]="loader_service.loading" *ngIf="!loader_service.loading" -->
+  <div class="q" *ngIf="question$ | async as q" [style.opacity]="(loading$ | async) ? 0 : 1">
+    <div class="q__header">
+      <h1 class="q__header__title">{{ q.title }}</h1>
+      <p class="q__header__description">{{ q.description }}</p>
+      <div class="q__header__info">
+        <div class="q__header__wrapper">
+          <mat-chip-list class="q__header__info__tags">
+            <mat-chip color="primary" selected="true" *ngFor="let tag of q.tags">
+              {{ tag }}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="q__header__info__wrapper">
+          <button
+            mat-stroked-button
+            class="q__header__info__item q__header__info__answer-btn"
+            (click)="add_answer()"
+          >
+            Ответить
+            <mat-icon>draw</mat-icon>
+          </button>
+          <button
+            mat-stroked-button
+            class="q__header__info__item q__header__info__edit-btn"
+            *ngIf="user_compare(q.autor_id)"
+            (click)="edit_question()">
+            Изменить вопрос
+            <mat-icon class="material-icons-outlined">edit</mat-icon>
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            class="q__header__info__item q__header__info__remove-btn"
+            *ngIf="user_compare(q.autor_id)"
+            (click)="remove_question()"
+          >
+            Удалить вопрос
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+          </button>
+          <span class="q__header__info__item q__header__info__answers-count">
+            Ответов: {{ q.answers ? q.answers.length : '0' }}
+          </span>
+        </div>
+      </div>
+      <span class="q__header__line"></span>
+    </div>
+    <div class="q__no-answers">
+      <h4 class="q__no-answers__title" *ngIf="!q.answers?.length">У этого вопроса пока нет ответов</h4>
+    </div>
+    <div class="q__answers">
+      <div class="q__answers__answer" *ngFor="let answer of q.answers; let last_item = last;">
+        <div class="q__answers__answer__header">
+          <div class="q__answers__answer__autor">
+            <img
+              src="https://content-7.foto.my.mail.ru/community/wetraveltheworld/_groupsphoto/h-128.jpg"
+              alt="autor-image"
+              class="q__answers__answer__autor__img"
+            />
+            <div class="q__answers__answer__autor__wrapper">
+              <h3 class="q__answers__answer__autor__name">{{ answer.autor.login }}</h3>
+              <span class="q__answers__answer__autor__date">Отвечено {{ answer.date | date: 'd MMMM y' }}</span>
+            </div>
+          </div>
+        </div>
+        <p class="q__answers__answer__text">{{ answer.text }}</p>
+        <div class="q__answers__answer__bottom">
+          <div class="q__answers__answer__bottom__votes">
+            <button
+              class="q__answers__answer__bottom__votes__btn q__answers__answer__bottom__votes__like-btn"
+              mat-button
+              [class.voted_previously]="answer.votes.liked_by.includes((user$ | async)!._id)"
+              (click)="like_answer(answer.id!)"
+            >
+              {{ answer.votes.liked_by.length }}
+              <mat-icon>
+                {{ answer.votes.liked_by.includes((user$ | async)!._id) ? 'thumb_up' : 'thumb_up_off_alt' }}
+              </mat-icon>
+            </button>
+            <button
+              class="q__answers__answer__bottom__votes__btn q__answers__answer__bottom__votes__dislike-btn"
+              mat-button
+              [class.voted_previously]="answer.votes.disliked_by.includes((user$ | async)!._id)"
+              (click)="dislike_answer(answer.id!)"
+            >
+              {{ answer.votes.disliked_by.length }}
+              <mat-icon>
+                {{ answer.votes.disliked_by.includes((user$ | async)!._id) ? 'thumb_down' : 'thumb_down_off_alt' }}
+              </mat-icon>
+            </button>
+          </div>
+          <button
+            matTooltip="Изменить ответ"
+            mat-icon-button
+            class="q__answers__answer__bottom__remove-btn"
+            *ngIf="user_compare(answer.autor._id)"
+            (click)="edit_answer(answer)">
+            <mat-icon class="material-icons-outlined">edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            matTooltip="Удалить ответ"
+            color="warn"
+            class="q__answers__answer__bottom__remove-btn"
+            *ngIf="user_compare(answer.autor._id)"
+            (click)="remove_answer(answer)"
+          >
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

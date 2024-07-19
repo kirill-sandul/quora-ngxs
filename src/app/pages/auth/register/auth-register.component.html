@@ -1,0 +1,27 @@
+<app-auth-page-wrapper>
+  <div class="auth__widget__links">
+    <a routerLink="/auth/login" class="auth__widget__links__link">Если уже есть аккаунт</a>
+    <a href="" class="auth__widget__links__link">Политика конфиденциальности</a>
+  </div>
+  <mat-stepper linear>
+    <mat-step>
+      <button type="submit" mat-flat-button matStepperNext color="primary">
+        Регистрация
+      </button>
+    </mat-step>
+    <mat-step>
+      <app-reactive-form
+        [form_schema]="form_schema"
+        [form_names]="form_names"
+        (invalid)="toggle_button($event)"
+        (on_submit)="submit($event)"
+      >
+        <div class="auth__widget__form__buttons">
+          <button type="submit" mat-flat-button color="primary" [disabled]="invalid || create_loading">
+            Далее
+          </button>
+        </div>
+      </app-reactive-form>
+    </mat-step>
+  </mat-stepper>
+</app-auth-page-wrapper>

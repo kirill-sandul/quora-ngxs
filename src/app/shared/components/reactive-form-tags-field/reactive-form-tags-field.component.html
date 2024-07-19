@@ -1,0 +1,22 @@
+<mat-form-field
+  [class]="class"
+  [formGroup]="form"
+  [appearance]="field.appearance ? $any(field.appearance) : 'outline'"
+>
+  <mat-label>{{ field.label }}</mat-label>
+  <mat-chip-list #chipList formControlName="tags" aria-label="Добавление тэгов">
+    <mat-chip *ngFor="let tag of form.get(field.name)!.value" (removed)="remove_chip(tag)">
+      {{tag}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input
+      #tag_input
+      placeholder="Новый тэг..."
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separator_keys_codes"
+      (matChipInputTokenEnd)="add_chip($event)" />
+  </mat-chip-list>
+  <mat-error *ngIf="form.get('tags')!.invalid">{{control_error('tags')}}</mat-error>
+</mat-form-field>

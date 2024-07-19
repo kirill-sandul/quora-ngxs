@@ -1,0 +1,28 @@
+<main class="home">
+  <div class="container">
+    <div class="home__questions">
+      <div class="home__questions__header">
+        <h1 class="home__questions__header__title">Вопросы</h1>
+        <app-home-tags *ngIf="search_service.search_type === 'questions'"></app-home-tags>
+        <button mat-stroked-button (click)="add_tag()">
+          Добавить тэг
+          <mat-icon>add</mat-icon>
+        </button>
+        <span class="home__questions__header__line"></span>
+      </div>
+      <app-search></app-search>
+      <div class="home__questions__main">
+        <app-tag-block
+          class="home__questions__main__block"
+          *ngIf="search_service.search_type === 'tags'"
+        >
+        </app-tag-block>
+        <app-qs-block
+          class="home__questions__main__block"
+          *ngIf="search_service.search_type === 'questions'"
+        >
+        </app-qs-block>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,115 @@
+@use '@angular/material' as mat;
+
+// font
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Manrope:wght@400;500;700&display=swap');
+
+// icons
+// @import url('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round');
+
+// modules
+@import './normalize';
+@import './vars';
+@import './fonts';
+
+@include mat.core();
+
+$quora-primary: mat.define-palette(mat.$indigo-palette);
+$quora-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
+
+$quora-warn: mat.define-palette(mat.$red-palette);
+
+$quora-theme: mat.define-light-theme((
+  color: (
+    primary: $quora-primary,
+    accent: $quora-accent,
+    warn: $quora-warn,
+  )
+));
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Manrope'
+);
+
+@include mat.core($custom-typography);
+
+@include mat.all-component-themes($quora-theme);
+
+html, body {
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  // color: map-get($map: $quora-primary, $key: 500);
+  color: $primary_blue;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 70px 50px;
+}
+
+.drag-scroll-content {
+  width: 100% !important;
+}
+
+.mat-progress-bar {
+  height: 2.5px !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+.mat-button, .mat-stroked-button {
+  transition: .2s;
+  
+  &.flex > .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mat-chip {
+  user-select: none;
+}
+
+.widget__form__field {
+  min-width: 400px;
+}
+
+.mat-dialog-container {
+  .mat-dialog-content {
+    overflow: hidden;
+  }
+  .mat-dialog-actions {
+    flex-wrap: nowrap;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  &__progress-bar {
+    justify-self: flex-start;
+    align-self: flex-start;
+  }
+}

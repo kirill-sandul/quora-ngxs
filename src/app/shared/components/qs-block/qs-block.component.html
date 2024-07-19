@@ -1,0 +1,26 @@
+<div class="home__questions__main__wrapper">
+  <app-tag-info
+    class="home__questions__main__tag-info"
+    *ngIf="(selected_tag$ | async)?.name"
+    [tag]="(selected_tag$ | async)!"
+  >
+  </app-tag-info>
+</div>
+<div class="home__questions__main__wrapper">
+  <div class="home__questions__main__list">
+    <app-q-card class="home__questions__main__list__item" *ngFor="
+      let q of questions$ | async;
+      let last_item = last;" [question]="q">
+    </app-q-card>
+    <h4 class="home__questions__main__list__empty"
+      *ngIf="!(questions$ | async)">
+      По этому тэгу не найдено вопросов
+    </h4>
+  </div>
+  <app-load-more-btn
+    [btn_state$]="load_more_btn$"
+    [callback]="load_more.bind(this)"
+    [btn_loading]="load_more_btn_loading"
+  >
+  </app-load-more-btn>
+</div>

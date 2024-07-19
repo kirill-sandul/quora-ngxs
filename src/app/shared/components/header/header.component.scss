@@ -1,0 +1,53 @@
+@import '../../../scss/vars';
+
+.header {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding: 12px 0;
+  border-bottom: 1px solid #d6d5d5;
+  z-index: 9999;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px;
+  }
+
+  &__logo {
+    font-weight: 700;
+    font-size: 30px;
+    margin-right: 20px;
+  }
+
+  &__line {
+    display: block;
+    width: 50%;
+    height: 1px;
+    background-color: $primary_gray_light;
+  }
+
+  &__account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__name {
+      margin-right: 5px;
+    }
+
+    &__settings-btn {
+      margin-right: 10px;
+    }
+  }
+  
+  &__progress-bar {
+    position: absolute;
+    top: 100%;
+    transition: .2s;
+  }
+}
